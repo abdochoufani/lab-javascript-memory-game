@@ -28,8 +28,8 @@ var cards = [
 $(document).ready(function(){
   var memoryGame = new MemoryGame(cards);
   var html = '';
+  memoryGame.shuffleCards(cards);
   memoryGame.cards.forEach(function (pic) {
-    memoryGame.shuffleCards(cards);
     html += '<div class="card" data-card-name="'+ pic.name +'">';
     html += '  <div class="back" name="'+ pic.img +'"></div>';
     html += '  <div class="front" style="background: url(img/'+ pic.img +') no-repeat"></div>';
@@ -46,6 +46,7 @@ $(document).ready(function(){
       memoryGame.pickedCards.push($(this).parent());
     }
     if(memoryGame.pickedCards.length ===2) {
+      $(this).attr("disabled", true);
       var firstCard=memoryGame.pickedCards[0].data("card-name");
       var secondCard=memoryGame.pickedCards[1].data("card-name");
       if(memoryGame.checkIfPair(firstCard,secondCard)){
@@ -55,6 +56,7 @@ $(document).ready(function(){
         alert("YOU WON")
       }else {
         setTimeout(function(){
+          $('.back').attr("disabled", true);
           memoryGame.pickedCards[0].children().toggleClass("back front");
           memoryGame.pickedCards[1].children().toggleClass("back front");
           memoryGame.pickedCards=[]   
