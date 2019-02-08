@@ -51,6 +51,7 @@ $(document).ready(function(){
       var secondCard=memoryGame.pickedCards[1].data("card-name");
       if(memoryGame.checkIfPair(firstCard,secondCard)){
         memoryGame.pickedCards=[];
+        $(this).attr("disabled", false);
       }
       if(memoryGame.isFinished()){
         alert("YOU WON")
